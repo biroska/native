@@ -13,10 +13,8 @@ public class NativeServiceImpl implements NativeService {
     @Value("${application.version}")
     private String version;
 
-    @Value("${api.top-rated}")
-    private String topRated;
     @Override
     public String nativeProfile() {
-        return MessageFormat.format("Hello World! {0} - {1}", version, topRated.substring(0,10));
+        return MessageFormat.format("Hello World! {0}", version);
     }
 }
