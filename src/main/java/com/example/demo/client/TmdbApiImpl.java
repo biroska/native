@@ -1,7 +1,8 @@
 package com.example.demo.client;
 
+import com.example.demo.binding.TheMovieDbConfig;
 import com.example.demo.model.TopRated;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -13,12 +14,20 @@ public class TmdbApiImpl implements TmdbApi {
 
     RestClient restClient = RestClient.create();
 
-    @Value("${api.top-rated}")
-    private String topRated;
+//    @Value("${tmdb.api.top-rated}")
+    private String topRated ="https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+
+    @Autowired
+    private TheMovieDbConfig config;
 
 
     @Override
     public TopRated getTopRated() {
+
+//        MessageFormat.format("TmdbApiImpl.getTopRated: {0}", config );
+
+        System.out.println("TmdbApiImpl.getTopRated : " + config );
+
 
         ResponseEntity<TopRated> result = restClient.get()
                 .uri(topRated)
